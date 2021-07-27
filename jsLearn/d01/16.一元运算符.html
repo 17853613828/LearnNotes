@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+      /* 
+        一元运算符，只需要一个操作数
+        + 正号 不会对数字产生任何影响
+        - 负号 可以对数字进行符号的取反
+        - 对于非Number类型的值,它会将其转化为Number，在进行运算
+        可以对一个其他的数据类型使用+，来将其转化为Number
+        它的原理和Number() 一样
+       */
+      var a = -true //number -1
+      // a = +'18'   //number 18
+      // a = -'18'   //number -18
+      // a = 1 + +'2' +3  //number 6
+      // a = -undefined  //number NaN
+      // a = -null       //number 0
+      console.log('a='+a)
+      console.log(typeof a)
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
