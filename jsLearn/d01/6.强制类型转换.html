@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>强制类型转换</title>
+</head>
+<body></body>
+<script>
+  /* 
+    将其他的数据类型转化为String
+    方式1：调用被转化数据类型的toString()方法
+      该方法不会影响到原变量，它会将转化的结果返回
+      但是注意：null和undefined这两个值没有toString()方法
+    方式2：调用String()函数
+      调用String()函数做强制类型转化时，
+      对于Number和Boolean实际上就是调用的toString()方法
+      但是对于null和undefined就不会调用toString()方法
+      它会将null直接转换为'null'
+      将undefined直接转换为'undefined'
+  */
+  /* 
+    将其他数据类型转化为Number
+    方式1：使用Number()函数
+      --字符串转化为数字
+        1.如果是纯数字的字符串，则直接将其转化为数字
+        2.如果字符转中有非数字的内容，则转换为NaN
+        3.如果字符串是一个空串或者是一个全是空格的字符串，则转换为0
+      --布尔转化为数字
+        true ---> 1 false ---> 0
+      --Null转化为数字
+        null ---> 0
+      --undefined转化为数字
+        undefined --> NaN
+
+    方式2： 这种方式专门用来对付字符串
+      parseInt() 可以将一个字符串中的有效的整数内容取出来，然后转换为Number
+      parseFloat() 作用和parseInt()类似，不同的是他可以获得有效的小数
+
+      如果对非String使用parseInt()或parseFloat()它会将其转换为string然后再操作 
+
+    在js中，如果需要表示16进制的数字，则需要以0x开头
+            如果需要表示8进制的数字，则需要以0开头
+            如果需要表示2进制的数字，则需要以0b开头，但是不是所有的浏览器都支持
+
+    ！！！可以在parseInt()中传递第二个参数，来指定数字的进制        
+  */
+
+  /* 
+    将其他的数据类型转化为Boolean
+    使用Boolean()函数
+    
+  */
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数的方法</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    call()和apply()
+    - 这两个方法都是函数对象的方法，需要通过函数对象来调用
+    - 当对函数调用call()和apply()都会调用函数执行
+    - 在调用call()和apply()可以将一个对象指定为第一个参数
+      此时这个对象将会成为函数执行时的this
+      call()方法可以将实参在对象之后依次传递-----参考倒数第二行代码
+      apply()方法需要将实参封装到一个数组中统一传递-----参考倒数第一行代码
+
+
+      - this的情况，
+      1.以函数形式调用时，this是window
+      2.以方法形式调用时，this是调用方法的对象
+      3.以构造函数的形式调用时，this是新创建的那个对象
+      4.使用call和apply调用时，this是指定的那个对象
+  */
+
+  /* 以下三种调用效果是一样的
+    1、fun();  2、fun.call();  3、fun.apply();
+  */
+
+  /* 
+    function fun() {
+      console.log(this.name)
+    }
+    var obj = { 
+      name:'孙悟空',
+      sayName: function () {
+        console.log(this.name)
+      }
+    };
+    var obj2 = { 
+      name: '猪八戒',
+      sayName: function () {
+        console.log(this.name)
+      }
+    };
+  
+    fun();  // 以函数形式调用 this指向window
+    fun.call(obj);  // this指向obj----------孙悟空
+    fun.apply(obj);  // this指向obj----------孙悟空
+    fun.call(obj2);  // this指向obj2----------猪八戒
+    fun.apply(obj2);  // this指向obj2----------猪八戒 
+
+    obj.sayName.apply(obj2)   // 猪八戒
+
+  */
+  
+  /* 
+    function fun2(a,b) {
+      console.log('a='+a)
+      console.log('b='+b)
+    }
+    var obj3 = { 
+      name:'孙悟空',
+      sayName: function () {
+        console.log(this.name)
+      }
+    };
+    fun2.call(obj3)     // a=undefined b=undefined
+    fun2.call(obj3,2,3) // a=2 b=3
+    fun2.apply(obj3,[2,3]) // a=2 b=3
+  */
+ 
+
+</script>
+</html>
