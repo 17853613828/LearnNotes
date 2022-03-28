@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则表达式语法</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 题：创建一个正则表达式检查一个字符串中是否含有aaa?
+  
+  /*  量词
+    - 通过量词可以设置一个内容出现的次数
+    - 量词只对它前面的一个内容起作用
+    - {n} 正好连续出现n次
+    - {m, n} 出现m-n次
+    - {m, }  出现m次以上
+    - + 至少一个，相当于{1, }
+    - * 0个或多个，相当于{0, }
+    - ? 0个或1个，相当于{0，1}
+  */
+  
+  // var reg = /a{3}/  //找a，并且a连续出现3次
+  // console.log(reg.test('aaabcd'))   // true
+  
+  // ababab
+  // console.log(/ab{3}/.test('ababab'))     // false
+  // console.log(/(ab){3}/.test('ababab'))   // true
+  // console.log(/ab{1,3}c/.test('abc'))   // true
+  // console.log(/ab{1,3}c/.test('abbc'))   // true
+  // console.log(/ab{1,3}c/.test('abbbc'))   // true
+  // console.log(/ab{1,3}c/.test('abbbbc'))   // false
+
+
+  /* 
+    检查一个字符串中是否以a开头
+    ^ 表示开头
+    $ 表示结尾
+  */
+  //  var reg = /^a/
+  //  console.log(reg.test('dcba'))  // false
+  //  console.log(reg.test('abc'))   // true
+  
+  //  var reg2 = /a$/
+  //  console.log(reg2.test('dcba'))  // true
+  //  console.log(reg2.test('abc'))   // false
+
+  //  var reg3 = /^a$/ // 如果正则表达式中同时使用^$则要求字符串必须完全符合正则表达式
+  //  console.log(reg3.test('aaa'))  // false
+  //  console.log(reg3.test('a'))  // true
+  
+  //  var reg4 = /^a|a$/ // 以a开头 或者 以a结尾
+  //  console.log(reg4.test('aaa'))    // true
+  //  console.log(reg4.test('abba'))   // true
+
+  
+  /* 
+    创建一个正则表达式，用来检查是否是一个手机号
+    手机号的规则：
+    1. 以1开头
+    2. 第二位 3-9任意数字
+    3. 第三位以后9位数字
+  */
+  
+  // var reg = /^1[3-9][0-9]{9}$/
+  // console.log(reg.test('13561404326'))  // true
+</script>
+</html>
