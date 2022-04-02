@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM增删改</title>
+</head>
+<body></body>
+<script>
+  /* 
+    1.document.createElement()
+    可以用于创建一个元素节点对象，它需要一个标签名作为参数，
+    将会根据该标签名创建元素节点对象，并将创建好的对象作为返回值返回
+  */
+  // var li = document.createElement('li')
+
+  /* 
+    2.document.createTextNode()
+    可以用来创建一个文本节点对象，它需要一个文本内容作为参数，
+    将会根据该内容创建文本节点，并将新的节点返回 
+  */
+  // var text = document.createTextNode('文本内容')
+
+  /* 
+    appendChild()
+    - 向一个父节点中添加一个新的子节点
+    - 用法：父节点.appendChild(子节点)
+  */
+  // li.appendChild(text)
+ 
+  /* 
+    insertBefore()
+    可以在指定的子节点前插入新的子节点
+    用法：父节点.insertBefore(新节点,旧节点)
+  */
+ 
+  /* 
+    replaceChild()
+    可以使用指定的子节点来替换已有的子节点
+    用法：父节点.replaceChild(新节点,旧节点)
+  */
+
+  /* 
+    removeChild()
+    可以删除一个子节点
+    用法：父节点.removeChild(子节点)  
+      相当于：子节点.parentNode.removeChild(子节点)
+  */
+
+  /* 
+    innerHTML
+    使用innerHTML也可以完成DOM的增删改的相关操作
+  */
+
+
+  
+
+
+  /* 
+    点击超链接以后，超链接会跳转页面，这个是超链接的默认行为，
+    但是此时我们不希望出现默认行为，可以通过在响应函数的最后return false来取消默认行为
+    或者 <a href="javascript:;"></a>
+  */
+  /* 
+    confirm()用于弹出一个带有确认和取消按钮的提示框
+    需要一个字符串作为参数，该字符串将会作为提示文字显示出来
+    如果用户点击确认则返回true，如果点击取消则返回false
+  */
+  
+</script>
+</html>

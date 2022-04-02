@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>其他样式相关属性</title>
+  <style>
+    #wrap {
+      padding: 10px 20px;
+    }
+    #box {
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: 10px solid yellow;
+      background-color: red;
+      display: none;
+    }
+    #box1 {
+      width: 200px;
+      height: 200px;
+      overflow: auto;
+    }
+    #box2 {
+      width: 300px;
+      height: 600px;
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap" style="position: relative;">
+    <div id="box"></div>
+  </div>
+
+  <div id="box1">
+    <div id="box2"></div>
+  </div>
+</body>
+<script>
+  /* 
+    clientWidth
+    clientHeight
+      - 这两个属性可以获取元素的可见宽度和高度
+      - 这些属性都是不带px的，返回的都是一个数字，可以直接进行计算
+      - 会获取元素的宽度和高度，包括内容区和内边距(content + padding)
+      - 这些属性都是只读的，不能修改
+  */
+  // var box = document.getElementById('box')
+  // alert(box.clientWidth)
+  // alert(box.clientHeight)
+
+  /* 
+    offsetWidth
+    offsetHeight
+      - 获取元素的整个的宽度和高度，包括内容区、内边距和边框(content + padding + border)
+  */
+
+  /* 
+    offsetParent
+      - 可以用来获取当前元素的定位父元素
+      - 它会获取到当前元素最近的开启了定位的祖先元素，
+        如果所有的祖先元素都没有开启定位，则返回body
+  */
+
+  /* 
+    offsetLeft
+      - 当前元素相对于其定位父元素的水平偏移量
+    offsetTop
+      - 当前元素相对于其定位父元素的垂直偏移量
+  */
+  
+  var box = document.getElementById('box')
+  var wrap = document.getElementById('wrap')
+  // console.log(box.offsetParent)     // div#wrap
+  // console.log(box.offsetLeft)       // 20
+  // console.log(box.offsetTop)       // 10
+
+
+
+  /* 
+    scrollWidth
+    scrollHeight
+    - 可以获取元素整个滚动区域的宽度和高度
+  */
+  var box1 = document.getElementById('box1')
+  var box2 = document.getElementById('box2')
+  // console.log(box1.clientWidth)   // 183
+  // console.log(box1.clientHeight)  // 183
+  // console.log(box1.scrollWidth)   // 300
+  // console.log(box1.scrollHeight)  // 600
+
+  // console.log(box2.clientWidth)   // 300
+  // console.log(box2.clientHeight)  // 600
+  // console.log(box2.scrollWidth)   // 300
+  // console.log(box2.scrollHeight)  // 600
+
+  /* 
+    scrollLeft
+    - 可以获取水平滚动条滚动的距离
+    scrollTop
+    - 可以获取垂直滚动条滚动的距离
+  */
+
+  /* 
+    隐藏的距离：scrollHeight - clientHeight 
+    垂直滚动条滚动到底：scrollHeight - scrollTop = clientHeight
+    水平滚动条滚动到底：scrollWidth - scrollLeft = clientWidth
+  */
+
+</script>
+</html>
