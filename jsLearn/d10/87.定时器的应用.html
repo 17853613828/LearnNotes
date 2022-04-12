@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定时器的应用</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #box1 {
+      margin-top: 20px;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: relative;
+    }
+    #box2 {
+      margin-top: 20px;
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn01">点击按钮以后box1向右移动</button>
+  <button id="btn02">点击按钮以后box1向左移动</button>
+  <button id="btn03">点击按钮以后box2向上/下移动</button>
+  <br>
+  <div id="box1"></div>
+  <div id="box2"></div>
+</body>
+<script>
+  function getStyle(obj,name) {
+    if(window.getComputedStyle) {
+      return getComputedStyle(obj,null)[name]   // 其他浏览器
+    } else {
+      return obj.currentStyle[name]   // IE8
+    }
+  }
+
+  // 获取box1
+  var box1 = document.getElementById('box1')
+  // 获取box2
+  var box1 = document.getElementById('box2')
+  // 获取btn01
+  var btn01 = document.getElementById('btn01')
+  // 获取btn02
+  var btn02 = document.getElementById('btn02')
+  // 获取btn02
+  var btn03 = document.getElementById('btn03')
+
+  /* 
+    目前我们的定时器的标识由全局变量timer保存，
+    所有的执行的定时器都在这个变量中保存
+  */
+  // var timer;
+
+  // 点击按钮btn01以后，使box1向右移动(left值增大)
+  btn01.onclick = function() {
+    // clearInterval(timer)
+    // // 开启一个定时器，用来执行动画效果
+    // timer = setInterval(function(){
+    //   // 获取box1的原来的left值
+    //   var oldValue = parseInt(getStyle(box1, 'left'))
+    //   // 在旧值得基础上增加
+    //   var newValue = oldValue + 10
+    //   if(newValue >= 800) {
+    //     newValue = 800
+    //   }
+    //   //  将新值设置给box1
+    //   box1.style.left = newValue + 'px'
+    //   // 当元素移动到800px时，使其停止执行动画
+    //   if(newValue === 800) {
+    //     clearInterval(timer)
+    //   }
+    // },30)
+
+    move(box1, 'left', 800, 10)
+  }
+  // 点击按钮btn02以后，使box1向左移动(left值减小)
+  btn02.onclick = function() {
+    // clearInterval(timer)
+    // // 开启一个定时器，用来执行动画效果
+    // timer = setInterval(function(){
+    //   // 获取box1的原来的left值
+    //   var oldValue = parseInt(getStyle(box1, 'left'))
+    //   // 在旧值得基础上增加
+    //   var newValue = oldValue - 10
+    //   if(newValue <= 0) {
+    //     newValue = 0
+    //   }
+    //   //  将新值设置给box1
+    //   box1.style.left = newValue + 'px'
+    //   // 当元素移动到800px时，使其停止执行动画
+    //   if(newValue === 0) {
+    //     clearInterval(timer)
+    //   }
+    // },30)
+    move(box1, 'left',  0, 10)
+  }
+
+  // 点击按钮btn03以后, 使box2向上或向下移动
+  // btn03.onclick = function() {
+  //   move(box2, 'top', 800, 10)
+  // }
+  
+  // 点击按钮btn03以后, 使box2变高
+  // btn03.onclick = function() {
+  //   move(box2, 'height', 300, 10)
+  // }
+  // 点击按钮btn03以后, 使box2变宽
+  // btn03.onclick = function() {
+  //   move(box2, 'width', 500, 10)
+  // }
+  // 点击按钮btn03以后, 使box2先变宽后变高
+  btn03.onclick = function() {
+    move(box2, 'width', 500, 10, function() {
+      move(box2, 'height', 300, 10)
+    })
+  }
+
+  /* 
+    参数：
+      obj: 要执行动画的对象
+      attr: 要修改动画的样式，比如：left top width height 
+      target: 执行动画的目标位置
+      speed：移动的速度（正数向右移动，负数向左移动）
+      callback: 回调函数
+  */
+  function move(obj, attr, target, speed, callback) {
+    clearInterval(obj.timer)
+
+    // 获取元素目前的位置
+    var current = parseInt(getStyle(obj, attr))
+    // 如果当前值大于目标值 则speed为负
+    // 如果当前值小于目标值 则speed为正
+    if(current > target) {
+      speed = -speed
+    }
+    // 开启一个定时器，用来执行动画效果
+    // 向执行动画的对象中添加一个timer属性，用来保存它自己的定时器的标识
+    obj.timer = setInterval(function(){
+      // 获取box1的原来的left值
+      var oldValue = parseInt(getStyle(obj, attr))
+      // 在旧值得基础上增加
+      var newValue = oldValue + speed
+      // 向左移动时，需要判断NewValue是都小于target
+      // 向右移动时，需要判断NewValue是都大于target
+      if(speed < 0 && newValue < target || speed > 0 && newValue > target) {
+        newValue = target
+      }
+      //  将新值设置给box1
+      box1.style[attr] = newValue + 'px'
+      // 当元素移动到800px时，使其停止执行动画
+      if(newValue === target) {
+        // 达到目标，关闭定时器
+        clearInterval(obj.timer)
+        // 动画执行完毕，调用回调函数
+        callback && callback();
+      }
+    },30)
+  }
+</script>
+</html>
