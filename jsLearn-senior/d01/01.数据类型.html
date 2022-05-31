@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据类型</title>
+</head>
+<body></body>
+<script>
+  /* 
+    1.基本数据类型（值）
+      string number boolean undefined null
+    2.引用数据类型（引用）
+      Object Function Array
+  */
+  /* 
+    判断
+    typeof: 
+      - 可以判断 string / number / boolean / undefined / function
+      - 不能判断： null与object   array与object 
+    instanceof
+      - 
+    === / ==
+      - undefined / null
+  */
+  
+  // console.log(typeof console.log)   // function
+
+  // var b1 = {
+  //   b2: [1, 2, 3],
+  //   b3: function() {}
+  // }
+  // console.log(b1 instanceof Object)   // true
+  // console.log(b1.b2 instanceof Array, b1.b2 instanceof Object)  // true true
+  // console.log(b1.b3 instanceof Function, b1.b3 instanceof Object)   // true true
+
+
+  /* 
+    1.undefined 与 null的区别？
+      undefined 代表定义未赋值
+      null 定义并赋值了，只是值为null 
+
+      var a
+      console.log(a)  // undefined
+      a = null
+      console.log(a)  // null
+
+    2.什么时候给变量赋值为null呢？
+      var b = null
+      
+      1.初始赋值为null，表明将要赋值为对象
+        b = [1, 2, 3]
+      2.最后赋值为null，让b指向的对象成为垃圾对象(被垃圾回收器回收)
+        b = null
+
+    3.严格区别变量类型与数据类型？
+      数据类型：
+        基本类型
+        对象类型
+      变量类型：（变量内存值的类型）
+        基本类型：保存的就是基本类型的数据
+        引用类型：保存的是地址值
+  */
+
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>显式原型和隐式原型</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    1.每个函数function都有一个属性：prototype 即显式原型 
+    2.每个实例对象都有一个__proto__ 可称为隐式原型
+    3.实例对象的隐式原型的值为 其对应构造函数的显式原型的值
+    4.内存结构
+    5.总结：
+      * 函数的prototype属性：在定义函数时自动添加的，默认值时一个空对象Object
+      * 对象的__proto__属性：创建对象时自动添加的，默认值为构造函数的prototype属性值
+      * 能直接操作显式原型，但不能直接操作隐式原型(ES6之前)
+  */
+
+  /* 
+    原型链
+    访问一个对象的属性时，现在自身属性中找，找到返回
+    如果没有，再沿着__proto__这条链向上查找，找到返回
+    如果最终没有找到，返回undefined
+
+    别名：隐式原型链
+    作用：查找对象的属性（方法）    
+  */
+
+  /* 函数的显式原型指向的对象默认是空Object实例对象（但object不满足） */
+  console.log(Object.prototype instanceof Object) // false
+  console.log(Function.prototype instanceof Object) // true
+
+  /* 所有函数都是Function的实例（包括Function本身）*/
+  console.log(Function.__proto__ === Function.prototype)  // true
+
+  /* Object的原型对象是原型链尽头 */
+  console.log(Object.prototype.__proto__) // null
+
+
+
+  /* 
+    1.读取对象的属性值时：会自动到原型链中查找
+    2.设置对象的属性值时：不会查找原型链，如果当前对象中没有此属性，直接添加此属性并设置其值
+    3.方法一般定义在原型中，属性一般通过构造函数定义在对象本身上
+  */
+</script> 
+</html>
