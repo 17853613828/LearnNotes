@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rest参数</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // ES6引入rest参数，用于获取函数的实参，用来代替 arguments
+
+  // ES5获取实参的方式
+  function date() {
+    console.log(arguments)  // 伪数组
+  }
+  date('桂圆', '枸杞', '当归')
+
+  function date2(...args) {
+    console.log(args) //数组 ['桂圆', '枸杞', '当归'] 可以使用数组方法 filter some every map
+  }
+  date2('桂圆', '枸杞', '当归')
+
+
+  // rest 参数必须要放到参数最后，否则会报错
+  function num(a, b, ...args) {
+    console.log(a)    // 1
+    console.log(b)    // 2
+    console.log(args) // [3, 4, 5, 6, 7, 8]
+  }
+  num(1, 2, 3, 4, 5, 6, 7, 8)
+</script>
+</html>

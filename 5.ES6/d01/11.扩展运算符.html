@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>扩展运算符</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+</body>
+<script>
+  // ... 扩展运算符 能将「数组」转换为逗号分隔的「参数序列」
+  // 声明一个数组  使用 扩展运算符 ... 转化成 '易烊千玺', '王源', '王俊凯'
+  const tfboys = ['易烊千玺', '王源', '王俊凯'];  // ==> '易烊千玺', '王源', '王俊凯'
+
+  function chunwan() {
+    console.log(arguments);
+  }
+  chunwan(...tfboys)
+
+
+
+  /* ------------- 扩展运算符应用 -------------- */ 
+
+  // 1.数组的合并
+    const kuaizi = ['王太利', '肖央']
+    const fenghuang = ['曾毅', '玲花']
+    // const zuixuanxiaopingguo = kuaizi.concat(fenghuang)
+    const zuixuanxiaopingguo = [...kuaizi, ...fenghuang]
+    console.log(zuixuanxiaopingguo) // ['王太利', '肖央', '曾毅', '玲花']
+
+  // 2.数组的克隆
+  const sanzhihua = ['E', 'G', 'M']
+  const sanyecao = [...sanzhihua]
+  console.log(sanyecao) // ['E', 'G', 'M']
+
+  // 3.将伪数组转化为真正的数组
+  const divs = document.querySelectorAll('div')
+  console.log(divs)
+  const divArr = [...divs]
+  console.log(divArr)
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模版字符串</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // ES6 引入新的声明字符串的方式 ``
+
+  // 1.声明
+  let str = `字符串～`
+  console.log(str, typeof str)
+
+  // 2.特性：
+    // 1) 内容中可以直接出现换行符
+      let string = `<ul>
+                      <li>沈腾</li>
+                      <li>马丽</li>
+                      <li>贾玲</li>
+                    </ul>`
+    // 2) 变量拼接
+      let lovest = '沈腾'
+      let out = `${lovest}是我心目中最搞笑的演员！！`
+      console.log(out)
+</script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数实践与应用场景</title>
+  <style>
+    #ad {
+      width: 200px;
+      height: 200px;
+      background: #58a;
+    }
+  </style>
+</head>
+<body>
+  <div id="ad"></div>
+</body>
+<script>
+  // 需求1：点击div 2s后 背景色变为粉色
+  
+  // 获取元素
+  let ad = document.getElementById('ad');
+  // 绑定事件
+  // ad.onclick = function() {
+  //   let that = this  // 这里的this是ad，用that来保存this的值
+  //   setTimeout(function() {
+  //     console.log(this) // window
+  //     that.style.background = 'pink'
+  //   }, 2000)
+  // }
+
+  // ad.onclick = function() {
+  //   setTimeout(() => {
+  //     console.log(this) // 这里的this是ad
+  //     this.style.background = 'pink'
+  //   }, 2000)
+  // }
+
+
+  // 需求2: 从数组中返回偶数的元素
+  const arr = [1, 6, 9, 10, 23, 100]
+  // const result = arr.filter(function(item){
+  //   if(item % 2 === 0) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // })
+
+  const result = arr.filter(item => item % 2 === 0);
+  
+  console.log(result)
+
+
+  /*
+    总结： 
+      箭头函数适合与 this 无关的回调，定时器，数组的方法回调
+      箭头函数不适合与 this 有关的回调，事件回调，对象的方法
+  */ 
+</script>
+</html>
