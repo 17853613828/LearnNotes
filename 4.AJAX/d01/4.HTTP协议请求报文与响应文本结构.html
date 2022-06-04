@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTTP协议请求报文与响应文本结构</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+    HTTP（hypertext transport protocol）协议「超文本传输协议」，协议详细规定了浏览器和万维网服务器之间互相通信的规则。
+
+    请求报文  --重点是格式和参数
+      行  POST、URL、HTTP/1.1（协议版本）
+      头  Host: atguigu.com
+          Cookie: name=guigu 
+          Content-type: application/x-www-form-urlencoded
+          User-Agent: chrome 83
+      空行
+      体  username=admin&password=admin123
+
+    响应报文
+      行  1.HTTP/1.1（协议版本） 2.200（响应状态码） 3.OK（响应状态字符串）
+      头  Content-Type: text/html;harset=utf-8
+          Content-length: 2048
+          Content-encoding: gzip
+      空行
+      体  
+  */
+</script>
+</html>

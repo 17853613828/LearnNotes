@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX请求的基本操作</title>
+  <style>
+    #result {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn">点击发送请求</button>
+  <div id="result"></div>
+</body>
+<script>
+  // 获取button元素
+  const btn = document.getElementById('btn')
+  const result = document.getElementById('result')
+
+  // 1.点击btn按钮发送ajax请求
+  // 绑定事件
+  btn.onclick = function() {
+    // 1.创建对象
+    const xhr = new XMLHttpRequest();
+    // 2.初始化 设置请求方法和url
+    xhr.open('GET', 'http://127.0.0.1:8000/server?a=100&b=200&c=300')
+    // 3.发送
+    xhr.send();
+    // 4.事件绑定 处理服务器端返回的结果
+    // on readystate change readystate是xhr对象中的属性，表示状态 0 1 2 3 4
+    // 0 —— 初始化  1 —— open调用完毕 2 —— send调用完毕  3 —— 服务端返回了部分的结果 4 —— 服务端返回了所有的结果
+    xhr.onreadystatechange = function() {
+      // 判断（服务端返回了所有的结果）
+      if(xhr.readyState===4) {
+        // 判断响应状态码 200 404 403 401 500
+        if(xhr.status >= 200 && xhr.status < 300) {
+          // 处理结果 行 头 空行 体
+          // 响应行
+          console.log(xhr.status) // 状态码
+          console.log(xhr.statusText) // 状态字符串
+          console.log(xhr.getAllResponseHeaders) // 所有响应头
+          console.log(xhr.response) // 响应体
+
+          // 设置 result 的文本
+          result.innerHTML = xhr.response
+        } else {
+
+        }
+      }
+    }
+  }
+
+  // 2.鼠标移入result发送ajax请求
+  // post请求
+  result.addEventListener('mouseover', function() {
+    // 1.创建对象
+    const xhr = new XMLHttpRequest;
+    // 2.初始化 
+      // 设置类型和URL
+        xhr.open('POST', 'http://127.0.0.1:8000/server')
+      // 设置请求头
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        /*
+          Content-Type: 设置请求体内容的类型的  application/x-www-form-urlencoded: 参数查询字符串的类型
+        */
+    // 3.发送 
+    // xhr.send('a:100&b:200&c:300') 请求体可以设置任意格式数据 只要服务端能处理
+    xhr.send('a=100&b=200&c=300');
+
+    // 4.事件绑定
+    xhr.onreadystatechange = function() {
+      // 判断
+      if(xhr.readyState === 4) {
+        if(xhr.status>=200&xhr.status<300) {
+          // 处理服务端返回的结果
+          result.innerHTML = xhr.response
+        }
+      }
+    }
+  })
+
+  // 3.键盘按下发送ajax请求
+  window.onkeydown = function() {
+    // 发送请求
+    const xhr = new XMLHttpRequest();
+    // 设置响应体数据的类型
+    xhr.responseType = 'json'
+    // 初始化
+    xhr.open('GET', 'http://127.0.0.1:8000/json-server')
+    // 发送
+    xhr.send();
+    // 事件绑定
+    xhr.onreadystatechange = function() {
+      if(xhr.readyState === 4) {
+        if(xhr.status >= 200 && xhr.status < 300) {
+          console.log(xhr.response) 
+          // 1.手动对数据转换
+          // let data = JSON.parse(xhr.response)
+          // console.log(data)
+          // result.innerHTML = data.name
+          // 2.自动转换 -- 借助xhr上的responseType属性来进行转换 xhr.responseType = 'json'
+          console.log(xhr.response)
+          result.innerHTML = xhr.response.name
+        }
+      }
+    }
+
+  }
+</script>
+</html>

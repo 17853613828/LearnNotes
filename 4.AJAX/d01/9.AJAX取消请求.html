@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX取消请求</title>
+</head>
+<body>
+  <button id="send">点击发送</button>
+  <button id="cancel">点击取消</button>
+</body>
+<script>
+  const sendBtn = document.getElementById('send')
+  const cancelBtn = document.getElementById('cancel')
+  let xhr = null;
+  sendBtn.onclick = function() {
+    xhr = new XMLHttpRequest()
+    xhr.open('GET', 'http://127.0.0.1:8000/delay')
+    xhr.send();
+  }
+  cancelBtn.onclick = function() {
+    xhr.abort();
+  }
+</script>
+</html>
