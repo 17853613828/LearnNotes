@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>symbol的介绍和创建</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+    ES6引入了一种新的原始数据类型symbol，表示独一无二的值。它是javaScript语言的第七种数据类型，是一种
+    类似于字符串的数据类型。
+
+    Symbol特点
+    1）Symbol的值是唯一的，用来解决命名冲突的问题
+    2）Symbol值不能与其他数据进行运算
+    3）Symbol定义的对象属性不能使用for...in 循环遍历，但是可以使用Reflect.ownKeys来获取对象的所有键名
+
+  */
+
+  // 创建Symbol
+  let s = Symbol();
+  console.log(s, typeof s)   // Symbol()  'symbol'
+
+  let s2 = Symbol('中国青岛')
+  let s3 = Symbol('中国青岛')
+  console.log(s2 === s3)  // false
+
+  // Symbol.for创建
+  let s4 = Symbol.for('中国青岛')
+  let s5 = Symbol.for('中国青岛')
+  console.log(s4 === s5)  // true
+
+  // Symbol值不能与其他数据进行运算
+
+
+
+  /*--------------------- Symbol的使用 -----------------------*/
+
+  // 向对象中添加属性、方法
+  let game = {
+    name: 'this is a game',
+    up: function() {
+      console.log('这是up方法')
+    },
+    down: function() {
+      console.log('这是down方法')
+    }
+  }
+
+  // 声明一个对象
+  let methods = {
+    up: Symbol(),
+    down: Symbol()
+  };
+  game[methods.up] = function() {
+    console.log('this is up function')
+  }
+  game[methods.down] = function() {
+    console.log('this is down function')
+  }
+  console.log(game)
+
+
+  let youxi = {
+    name: '狼人杀',
+    [Symbol('say')]: function() {
+      console.log('我可以发言')
+    },
+    [Symbol('zibao')]: function() {
+      console.log('我可以自爆')
+    }
+  }
+  console.log(youxi)
+</script>
+</html>

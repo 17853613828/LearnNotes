@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symbol的内置属性</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 除了定义自己使用的Symbol值以外，ES6还提供了11个内置的Symbol值，指向语言内部使用的方法。
+
+  /*
+    1. Symbol.hasInstance 
+      当其他对象使用instanceof运算符，判断是否为该对象的实例时，会调用这个方法。
+  */
+    class Person{
+      static[Symbol.hasInstance](param) {
+        console.log(param)  // {}
+        console.log('我被用来检测类型了')
+        return true;  // 自己控制类型检测
+      }
+    }
+    let o = {}
+    console.log(o instanceof Person)
+
+  /*
+    2. Symbol.isConcatSpreadable 
+      对象的Symbol.isConcatSpreadable属性是一个布尔值，表示该对象用于Array.prototype.concat()时，
+      是否可以展开。
+  */
+    const arr = [1, 2, 3]
+    const arr2 = [4, 5, 6]
+    arr2[Symbol.isConcatSpreadable] = false;
+    console.log(arr.concat(arr2)) // [1, 2, 3, [4, 5, 6]]
+
+  /*
+    3.Symbol.unscopables
+      该对象指定了使用with关键字时，哪些属性会被with环境排除。
+  */
+  
+  /*
+    4.Symbol.match
+      当执行str.match(myObject)时，如果该属性存在，会调用它，返回该方法的返回值。
+  */
+  
+  /*
+    5.Symbol.replace
+      当该对象被str.replace(myObject)方法调用时，会返回该方法的返回值。
+  */
+  
+  /*
+    6.Symbol.search
+      当该对象被str.search(myObject)方法调用时，会返回该方法的返回值。
+  */ 
+
+  /*
+    7.Symbol.split
+      当该对象被str.split(myObject)方法调用时，会返回该方法的返回值。
+  */
+
+  /*
+    8.Symbol.iterator
+    对象进行for...of循环时，会调用Symbol.iterator方法，返回该对象的默认遍历器
+  */
+
+  /*
+    9.Symbol.toPrimitive
+      该对象被转为原始类型的值时，会调用这个方法，返回该对象对应的原始类型值
+  */
+ 
+  /*
+    10.Symbol.toStringTag
+      在该对象上面调用toString方法时，返回该方法的返回值
+  */
+ 
+  /*
+    11.Symbol.species
+      创建衍生对象时，会使用该属性
+  */ 
+</script>
+</html>
