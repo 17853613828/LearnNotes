@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6的数值扩展</title>
+</head>
+<body>
+  
+</body>
+<script>
+  
+  // 1. Number.EPSILON 是 JavaScript表示的最小精度
+  //  console.log(Number.EPSILON)  // 2.220446049250313e-16
+
+  // 2. 二进制和八进制
+  let b = 0b1010;   // 10
+  let o = 0o777;    // 511
+  let d = 100;      // 100
+  let x = 0xff;     // 255
+  // console.log(b, o, d, x)
+
+  // 3. Number.isFinite检测一个数值是否为有限数
+  // console.log(Number.isFinite(100))   // true
+  // console.log(Number.isFinite(100/0))   // false
+  // console.log(Number.isFinite(Infinity))  // false
+
+  // 4. Number.isNaN 检测一个数值是否为NaN
+  // console.log(Number.isNaN(123))  // false
+
+  // 5. Number.parseInt Number.parseFloat 字符串转整数、浮点数
+  console.log(Number.parseInt('5211314Love'))   // 5211314
+  console.log(Number.parseFloat('3.1415926pai'))  // 3.1415926
+
+  // 6. Number.isInteger 判断一个数是否为整数
+  console.log(Number.isInteger(5)); // true
+  console.log(Number.isInteger(2.3))  // false
+
+  // 7. Math.trunc 将数字的小数部分抹掉
+  console.log(Math.trunc(3.1415926))  // 3
+
+  // 8. Math.sign 判断一个数到底为正数、负数、还是零 
+  console.log(Math.sign(100)) // 1
+  console.log(Math.sign(0)) // 0
+  console.log(Math.sign(-20)) // -1
+  
+</script>
+</html>

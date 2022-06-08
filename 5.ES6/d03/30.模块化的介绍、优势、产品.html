@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块化</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+    模块化是指将一个大的程序文件，拆分成许多小的文件，然后将小文件组合起来。
+
+    模块化的好处：
+      1）防止命名冲突
+      2）代码复用
+      3）高维护性
+
+    模块化规范产品
+      ES6之前的模块化规范有：
+        1）CommonJS => NodeJS、Browserify
+        2) AMD => requireJS
+        3) CMD => seaJS
+  */ 
+
+  /* ----------------------- 浏览器使用ES6模块化引入模块 ----------------------- */
+
+  /*
+    ES6模块化语法：
+    模块功能主要由两个命令构成：
+    1.export 命令用于规定模块的对外接口
+    2.import 命令用于输入其他模块提供的功能
+  */
+
+  // ES6模块暴露数据语法： 
+  
+  // 1. 分别暴露
+  /* 
+    export let school = 'xxx学校';
+    export function teach() {
+      console.log('teach 函数')
+    }
+  */
+
+  // 2. 统一暴露
+  /* 
+    let a = '123';
+    function b() {
+      console.log('这是b函数')
+    }
+    export { a, b };
+  */
+ 
+  // 3. 默认暴露
+  /* 
+    export default {
+      school: 'aaaa',
+      change: function() {
+        console.log('asdd')
+      }
+    }
+  */
+
+
+  // ES6引入模块数据语法：
+
+  // 1.通用的导入方式
+  // import * as api from './api.js'
+
+  // 2.解构赋值形式
+  // import { getName, getAge } from './api.js'
+  // import { getName as getName2, getAgeFun } from './api2.js'
+  // import { default as m3 } from './m3.js'
+
+  // 3. 简便形式 只能针对默认暴露
+  // import m3 from './m3.js';
+
+</script>
+<!-- <script src="./app.js" type="modele"></script> -->
+<!-- 
+  app.js 入口文件 可以引入其他文件
+ -->
+</html>

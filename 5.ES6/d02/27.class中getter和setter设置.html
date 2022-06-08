@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>class中getter和setter设置</title>
+</head>
+<body>
+  
+</body>
+<script>
+  class Phone{
+    constructor(name, price) {
+      this.name = name;
+      this.price = price;
+    }
+    get getPrice() {
+      console.log(this.price)
+      return '价格为：' + this.price
+    }
+    set setPrice(param) {
+      this.price = param
+      console.log('修改后的价格为：' + this.price)
+    }
+  }
+  let p = new Phone('huawei', 5999);
+  console.log(p.getPrice);
+  p.setPrice = 3000;
+</script>
+</html>

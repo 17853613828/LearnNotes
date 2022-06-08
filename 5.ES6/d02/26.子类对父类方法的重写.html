@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>子类对父类方法的重写</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 子类对父类方法的重写，在子类声明一个跟父类同名的方法
+  class Phone {
+    constructor(brand, price) {
+      this.brand = brand
+      this.price = price
+    }
+    call() {
+      console.log('我可以打电话！！')
+    }
+  }
+
+  class SmartPhone extends Phone {
+    // 构造方法
+    constructor(brand, price, color, size) {
+      super(brand, price) // 相当于 Phone.call(this, brand, price)
+      this.color = color;
+      this.size = size;
+    }
+    photo() {
+      console.log('拍照')
+    }
+    playgame() {
+      console.log('玩游戏')
+    }
+    call(){
+      console.log('我可以视频通话!!!')
+    }
+  }
+
+  const xiaomi = new SmartPhone('小米', 1399, '黑色', '6inch');
+  // console.log(xiaomi);
+  xiaomi.call();
+  xiaomi.photo();
+  xiaomi.playgame();
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的静态成员</title>
+</head>
+<body>
+  
+</body>
+<script>
+  function Phone() {
+
+  }
+  Phone.name = '手机';
+  Phone.change = function() {
+    console.log('我可以改变世界')
+  }
+  let nokia = new Phone()
+  // console.log(nokia.name) // undefined
+  // nokia.change();   //  报错 nokia.change is not a function
+
+  // 实例对象访问不了构造函数上的属性的，可以访问构造函数原型上的属性
+
+  class Shouji {
+    // 静态属性
+    static name = '手机';
+    static change() {
+      console.log('我可以打电话！！')
+    }
+  }
+
+  let apple = new Shouji();
+  console.log(apple.name)   // undefined
+  console.log(Shouji.name)  // '手机'
+
+  // static标识的属性和方法 它属于类而不属于实例对象
+</script>
+</html>
