@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>async与await封装AJAX请求</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 发送ajax请求，返回的结果是Promise对象
+  function sendAJAX() {
+    return new Promise((resolve, reject)=>{
+      let xhr = new XMLHttpRequest();
+      xhr.open('get', 'http://127.0.0.1:8000/server');
+      xhr.send();
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+          if(xhr.status>=200&&xhr.status<300) {
+            resolve(xhr.response)
+          } else {
+            reject(xhr.status)
+          }
+        }
+      }
+    })
+  }
+  // promise then 方法测试
+  sendAJAX().then(value=>{
+    console.log(value)
+  }, reason=>{
+    console.log(reason)
+  })
+
+  // async 和 await 测试
+  async function main() {
+    try {
+      let result = await sendAJAX()
+      console.log(result)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  main()
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise.allSettled</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    Promise.allSettled 这个方法接收一个Promise数组，返回的结果也是一个Promise对象，
+    返回的结果永远是一个成功的状态
+  */
+  // 声明两个Promise对象
+  const p1 = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve('商品数据 -1');
+    }, 1000)
+  })
+
+  const p2 = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      reject('出错啦！')
+    }, 1000)
+  })
+
+  // 调用allSettled 方法
+  const result = Promise.allSettled([p1, p2]);
+  // console.log(result)
+  /* 
+    [[Prototype]]: Promise
+    [[PromiseState]]: "fulfilled"
+    [[PromiseResult]]: Array(2)
+    0: {status: 'fulfilled', value: '商品数据 -1'}
+    1: {status: 'rejected', reason: '出错啦！'}
+  */
+
+  // const result2 = Promise.all([p1, p2])
+  // console.log(result2)
+  /* 
+    如果p1 p2都返回成功 resolve 
+    则 PromiseState 就是 fulfilled
+    PromiseResult 就是 两个返回值组成的数组
+
+    如果p1成功(resolve) p2失败(reject)
+    则 PromiseState 就是 rejected
+    PromiseResult 就是 失败的Promise的返回值
+  */
+</script>
+</html>

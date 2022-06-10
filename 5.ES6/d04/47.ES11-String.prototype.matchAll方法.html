@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES11-String.prototype.matchAll</title>
+</head>
+<body>
+  
+</body>
+<script>
+  let str = `
+    <ul>
+      <li>
+        <a>肖申克的救赎</a>
+        <p>上映时间: 1994-09-10</p>  
+      </li> 
+      <li>
+        <a>阿甘正传</a>
+        <p>上映时间: 1994-07-06</p>  
+      </li>  
+    </ul>`;
+
+  // 声明正则
+  const reg = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/sg
+  // 调用方法
+  const result = str.matchAll(reg);
+  console.log(result);  // 返回的是一个可迭代对象 所以我们可以使用for...of... 也可以使用扩展运算符
+
+  // for(let v of result) {
+  //   console.log(v)
+  // }
+
+  const arr = [...result]
+  console.log(arr);
+</script>
+</html>

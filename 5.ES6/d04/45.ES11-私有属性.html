@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES11私有属性</title>
+</head>
+<body></body>
+<script>
+  class Person {
+    // 公有属性
+    name;
+    // 私有属性
+    #age;
+    #weight;
+    // 构造方法
+    constructor(name, age, weight) {
+      this.name = name;
+      this.#age = age;
+      this.#weight = weight;
+    }
+    intro() {
+      console.log(this.name, this.#age, this.#weight);
+      // 瑞秋 18 45KG
+    }
+  }
+  // 实例化
+  const girl = new Person('瑞秋', 18, '45KG')
+  console.log(girl.name); // 瑞秋
+  // console.log(girl.#age); // Private field '#age' must be declared in an enclosing class
+  // console.log(girl.#weight);  // Private field '#age' must be declared in an enclosing class
+
+  girl.intro();
+</script>
+</html>

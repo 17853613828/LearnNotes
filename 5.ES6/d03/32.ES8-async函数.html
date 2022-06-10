@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES8</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+    async和await两种语法结合可以让异步代码像同步代码一样
+
+    async函数的返回值为promise对象
+    promise对象的结果由async函数执行的返回值决定
+    （只要返回值的结果不是一个Promise类型的对象，结果就是成功的Promise，
+      如果返回的结果是一个Promise对象，那函数执行的结果就是该Promise返回的结果）
+  */
+  
+  async function fn() {
+    // return '123';   // 返回一个字符串
+    // return;
+    // 如果返回的结果不是一个promise类型的对象，则调用fn返回的结果（PromiseState：resolve）就是成功的promise对象
+    
+    // throw new Error('出错了。。。')
+    // 抛出错误，则调用fn返回的结果（PromiseState：rejected）就是一个失败的promise
+    
+    return new Promise((resolve, reject)=>{
+      // resolve('成功的数据')
+      reject('失败的错误')
+    })
+    // 返回的结果如果是一个promise对象，则调用fn返回的结果与返回值promise的结果有关，
+    // 如果返回值的promise是成功的，则fn返回值就是成功的promise
+    // 如果返回值的promise是失败的，则fn返回值就是失败的promise
+  }
+  const result = fn();
+  // console.log(result)
+  result.then(value => {
+    console.log(value)
+  }, reason => {
+    console.warn(reason)
+  })
+</script>
+</html>

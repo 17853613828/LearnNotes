@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object.fromEntries</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // Object.fromEntries 用来创建一个对象，参数接收一个二维数组或者map
+  // 二维数组
+  const result = Object.fromEntries([
+    ['name', '山东'],
+    ['cities', '济南,青岛,潍坊,烟台,威海']
+  ])
+  // console.log(result) // { cities: "济南,青岛,潍坊,烟台,威海", name: "山东" }
+
+  // Map
+  const m = new Map();
+  m.set('name', '刘雅楠');
+  console.log(m)
+  console.log(Object.fromEntries(m))  // { name: '刘雅楠' }
+
+  // ES10 中的 Object.fromEntries 跟 ES8 中的 Object.entries() 互为逆运算
+</script>
+</html>
