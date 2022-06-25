@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块化规范</title>
+</head>
+<body>
+</body>
+<script>
+  // CommonJS   AMD   CMD   ES6
+
+  /* 
+    CommonJS
+    
+    规范：
+      说明：1.每个文件都可以当作一个模块  2.在服务器端：模块的加载是运行时同步加载的
+           3.在浏览器端：模块需要提前编译打包处理
+      基本语法：
+        暴露模块：module.exports = value   exports.xxx = value   
+          暴露的模块到底是什么？是exports对象 
+        引入模块：require(xxx)
+          第三方模块：xxx为模块名
+          自定义模块：xxx为模块文件路径
+
+    实现：
+      1）服务器端实现：node.js
+      2）浏览器端实现：browserify 也称为CommonJS的浏览器端的打包工具
+
+  */
+
+  /* 
+    AMD
+
+    规范：
+      说明：Asynchronous Module Definition (异步模块定义)
+      专门用于浏览器端，模块的加载是异步的
+
+      基本语法：
+        定义暴露模块：
+          // 1.定义没有依赖的模块
+          define(function() {
+            return 模块
+          })
+          // 2.定义有依赖的模块
+          defined(['module1', 'module2'], function(m1, m2) {
+            return 模块
+          })
+        引入使用模块：
+          require(['module1', 'module2'], function(m1, m2) {
+            使用m1/m2
+          })
+    实现：Require.js
+
+    // 引入require.js并指定js主文件的入口
+    // < script data-main="js/main.js" src="js/libs/require.js">< /script>
+    
+  */
+
+  
+  /* 
+    CMD
+
+    规范：
+      说明：Common Module Definition(通过模块定义)
+          专门用于浏览器端，模块的加载是异步的
+          模块使用时才会加载执行
+
+      基本语法：
+        定义暴露模块：
+          // 1.定义没有依赖的模块
+          define(function(require, exports, module) {
+            exports.xxx = value
+            module.exports = value
+          })
+
+          // 2.定义有依赖的模块
+          define(function(require, exports, module){
+            // 引入依赖模块（同步）
+            var module2 = require('./module2')
+            // 引入依赖模块（异步）
+            require.async('./module3', function(m3) {
+
+            })
+            // 暴露模块：
+            exports.xxx = value
+          })
+
+        引入使用模块：
+          define(function(require) {
+            var m1 = require('./module1')
+            var m4 = require('./module4')
+            m1.show()
+            m4.show()
+          })
+    实现：
+          
+  */
+</script>
+</html>
