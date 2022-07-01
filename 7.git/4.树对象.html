@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>树对象</title>
+</head>
+<body></body>
+<script>
+  /* 
+    树对象，它能解决文件名保存的问题，也允许我们将多个文件组织到一起。git以一种类似于UNIX文件系统的方式
+    存储内容。所有内容均以树对象和数据对象（git对象）的形式存储，其中树对象对应了UNIX中的目录项，数据对
+    象（git对象）则大致上对应文件内容。一个树对象包含了一条或多条记录（每条记录含有一个指向git对象或者
+    子树对象的SHA-1指针，以及相应的模式、类型、文件名信息）。一个树对象也可以包含另一个树对象。
+  */
+  /* 
+    构建树对象
+    我们可以通过update-index;write-tree;read-tree等命令来构建树对象并塞入暂存区
+  */
+  /* 
+    查看暂存区当前的样子：git ls-files -s
+  */
+  /* 
+    操作：
+    1.利用update-index命令为test.txt文件的首个版本创建一个暂存区。并通过white-tree生产树对象。
+    命令：
+      echo 'test v1'>test.txt
+      git hash-object -w ./test.txt   --> 915c628f360b2d8c3edbe1ac65cf575b69029b61
+      git update-index --add --cacheinfo 100644 915c628f360b2d8c3edbe1ac65cf575b69029b61 test.txt
+        文件模式为: 
+          100644，表明这是一个普通文件  
+          100755，表示一个可执行文件,  
+          120000，表示一个符号链接。
+        --add选项：因为此前该文件并不在暂存区中 首次需要 --add
+        --catchinfo选项：因为将要添加的文件位于git数据库中，而不是位于当前目录下 所以需要--catchinfo
+
+      git write-tree 将暂存区做一个快照 生产一个树对象放到版本库里面
+
+      2.新增new.txt将new.txt和test.txt文件的第二个版本塞入暂存区。并通过write-tree生成树对象。
+      命令：
+        vim test.txt
+        git hash-object -w ./test.txt  生成一个新的SHA-1哈希值xxx
+        git update-index --cacheinfo 100644 xxx(xxx表示SHA-1哈希值) test.txt
+        echo 'new v1'>new.txt
+        git update-index --add new.txt
+        git write-tree      生成新的哈希值：24c4595b89f5fdbe19d02c746fc2de4b0abf6401
+      
+        3.将第一个树对象加入第二个树对象，使其成为新的树对象
+        命令：git read-tree --prefix=bak xxx(xxx表示第一个树对象的SHA-1哈希值) 
+             git write-tree
+
+             read-tree命令，可以把树对象读入暂存区
+  */
+  /* 
+    查看树对象：git cat-file -p 24c4595b89f5fdbe19d02c746fc2de4b0abf6401
+
+    040000 tree 72203871fa4668ad777833634034dcd3426879db	bak 
+    100644 blob eae614245cc5faa121ed130b4eba7f9afbcc7cd9	new.txt
+    100644 blob 915c628f360b2d8c3edbe1ac65cf575b69029b61	test.txt
+  */
+
+  /* 
+    解析树对象:
+        git根据某一时刻暂存区（即index区域）所表示的状态创建并记录一个对应的树对象，
+      如此重复便可以依次记录（某个时间段内）一系列树对象。
+        其实树对象是对暂存区内操作的抽象，这颗树对象相当于就是快照。当我们的工作区有
+      任何更改同步到暂存区时，便会调用write-tree命令。
+      通过write-tree命令向暂存区内容写入一个树对象。它会根据当前暂存区状态自动创建
+      一个新的树对象。即每一次同步都产生一颗树对象。且该命令会返回一个hash指向树对象。
+      在git中每一个文件（数据）都对应一个hash(类型blob)
+      每一个树对象都对应着一个hash(类型tree)
+
+    总结：
+      我们可以认为树对象就是我们项目的快照
+  */
+
+  /* 
+    问题：
+      现在有三个树对象（执行了三次write-tree）分别代表了我们想要跟踪的不同项目快照。然而问题依旧：若想重用这些快照，
+      你必须记住所有三个SHA-1哈希值。并且，你也完全不知道是谁保存了这些快照，在什么时刻保存的，以及为什么保存这些快照，
+      而以上这些，正是提交对象（commit object）能为你保存的基本信息。
+  */
+</script>
+</html>

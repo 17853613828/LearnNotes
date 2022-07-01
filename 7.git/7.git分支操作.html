@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git分支操作</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    几乎所有的版本控制系统都以某种形式支持分支。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。
+    在很多版本控制系统中，这是一个略微低效的过程 ————常常需要完全创建一个源代码目录的副本。对于大项目来说，这样的过程
+    会耗费很多时间。
+    而git的分支模型极其的高效轻量的。是git的必杀技特性，也正是因为这一特性，使得git从众多版本控制系统中脱颖而出。
+  */
+
+  /* 
+    ## git branch 分支名 创建一个新分支，并不会自动切换到新分支中去
+    作用：创建了一个可以移动的新的指针。比如创建了一个testing分支：git branch testing
+        这会在当前所在的提交对象上创建一个指针
+
+    ## git checkout 分支名 切换分支
+
+    ## git branch 得到当前所有分支的一个列表
+
+    ## git branch -d 分支名 删除已经合并的分支
+
+    ## git branch -D 分支名 强制删除分支
+
+    ## git branch -v 可以查看每一个分支的最后一次提交
+
+    ## git branch 新分支名 commitHash 新建一个分支并且使分支指向对应的提交对象
+
+    ## git branch --merged 查看哪些分支已经合并到当前分支 
+    在这个列表中分支名字前面没有*号的分支通常可以使用git branch -d 删除掉
+
+    ## git branch --no-merged 查看所有包含未合并工作的分支
+    尝试使用git branch -d命令删除在这个列表的分支时会失败。如果真的想要删除分支并丢掉那些工作，
+    可以使用 git branch -D 选项强制删除它。 
+
+    ## git log --oneline --decorate --graph --all  查看整个项目的分支图
+
+  */
+  
+  /* 
+    分支的本质是其实就是一个提交对象！！！
+    HEAD：是一个指针 它默认指向master分支 切换分支时 其实就是让HEAD指向不同的分支
+    每次有新的提交时，HEAD都会带着当前指向的分支一起往前移动
+  */
+
+  
+  /* 
+    git branch 新分支名 ---> git checkout 新分支名
+    可以合并为
+    git checkout -b 新分支名
+  */
+
+  /* 
+    ** 切换分支：！！！每次切换分支前 当前分支一定要全部是已提交状态 
+      坑：在切换分支时，如果当前分支上有未暂存的修改（第一次）或者有未提交的暂存（第一次）
+      虽然可以成功切换分支，但是这种操作可能会污染其他分支！！！
+      要动三个地方：HEAD 暂存区 工作目录
+  */
+
+  /* 
+    git存储
+    有时，当你在项目的一部分上已经工作一段时间后，所有东西都进入了混乱的状态，而这时你想要切换到
+    另一个分支做一点别的事情。问题是，你不想仅仅因为过会儿回到这一点而为做了一半的工作创建一次提交。
+    针对这个问题的答案是：
+    git stash 命令
+    git stash 命令会将未完成的修改保存到一个栈上，而你可以在任何时候重新应用这些改动（git stash apply）
+
+    git stash list 查看存储
+    git stash apply stash@{2}   如果不指定一个储藏，git认为指定的是最近的储藏
+    git stash drop 加上将要移除的储藏的名字来移除它
+
+    git stash pop 来应用储藏然后立即从栈上扔掉它
+  */
+
+
+  /* 
+    配别名
+    git 并不会在你输入部分命令时自动推断出你想要的命令。如果不想每次都输入完整的git命令，可以通过git config
+    文件来轻松得为每一个命令设置一个别名。
+    例如：
+    git config --global alias.co checkout
+    git config --global alias.ci commit
+    git config --global alias.st status
+    当要输入git commit时，只要输入 git ci
+  */
+
+  /* 
+    ## 合并分支
+    将test分支合并到master分支上
+    先 git checkout master
+    git merge test 
+  */
+</script>
+</html>

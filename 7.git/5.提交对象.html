@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>提交对象</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    我们可以通过调用commit-tree 命令创建一个提交对象，为此需要指定一个树对象的SHA-1值，
+    以及该提交的父提交对象（如果有的话 第一次将暂存区做快照就没有父对象）
+
+    ## 创建提交对象
+      echo 'first commit' | git commit-tree 72203871fa4668ad777833634034dcd3426879db
+      返回一个新的hash --->  0b5c7e6413ae7dfd9d79a2739cbefd8a7da40f63
+    ## 查看提交对象
+      git cat-file -t 0b5c7e6413ae7dfd9d79a2739cbefd8a7da40f63    ---> commit
+      git cat-file -p 0b5c7e6413ae7dfd9d79a2739cbefd8a7da40f63
+        --->
+        tree 72203871fa4668ad777833634034dcd3426879db
+        author lyn <1306292990@qq.com> 1656255534 +0800
+        committer lyn <1306292990@qq.com> 1656255534 +0800
+  */
+  
+  /* 
+    总结：本质上项目的版本就是一个提交对象，项目的快照是一个树对象
+  */
+</script>
+</html>

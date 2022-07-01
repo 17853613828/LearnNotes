@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git后悔药</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    工作区
+      如何撤回自己在工作目录中的修改：git restore filename
+    暂存区
+      如何撤回自己的暂存：git reset HEAD filename / git restore --staged filename
+      状态变化：已提交-->已修改
+    版本库
+      用户注释写错了，想重新修改注释：git commit --amend
+  */
+
+  /* 
+    git reset 三部曲
+
+    1. git reset --soft HEAD~
+    它本质上是撤销了上一次 git commit 命令。
+    当你在运行 git commit时， git会创建一个新的提交，并移动HEAD所指向的分支来使其指向该提交。
+    当你将它reset回HEAD～（HEAD的父结点）时，其实就是把该分支移动回原来的位置，而不会改变索引和工作目录。
+    现在你可以更新索引并再次运行git commit 来完成git commit --amend所要做的事情了。
+
+    git reset --soft (被撤销的提交对象的SHA-1值) 可以回滚到撤销之前。
+
+    2. git reset [--mixed] HEAD~
+    它依然会撤销上一次的提交，但还会取消暂存所有的东西。于是，我们回滚到了所有git add和git commit的命令执行之前。
+
+    3. git reset --hard HEAD~
+    它撤销了最后的提交、git add和git commit命令以及工作目录中的所有工作。
+  */
+
+  /* 
+    必须注意，--hard 标记是reset命令唯一的危险用法，它也是git会真正地销毁数据的仅有的几个操作之一。
+    其他任何形式的reset调用都可以轻松撤销，但是--hard选项不能，因为它强制覆盖了工作目录中的文件。
+    在这种特殊情况下，我们的git数据库中的一个提交内还留有该文件的v3版本，我们可以通过reflog来找回它。
+    但是若该文件还未提交，git仍会覆盖它从而导致无法恢复。
+  */
+
+  /* 
+    ## checkout
+    git checkout commitHash & git reset --hard commitHash
+    1.checkout 只动HEAD --hard动HEAD而且带着分支一起走
+    2.checkout 对工作目录是安全的 --hard是强制覆盖工作目录
+  */
+  
+  /* 
+    ## 路径reset
+    git reset [--mixed] HEAD filename
+    三部曲中唯一可以加filename的一个命令，reset将会跳过第一步 只动暂存区
+  */
+
+
+  /* 
+    ## 数据恢复
+    例如：
+      一共有五次提交，然后硬重置到第三次提交 git reset --hard '第三次提交的commitHash'
+      又想恢复到第五次提交
+      可以git reflog 查看第五次提交的commitHash，然后再 git reset --hard '第五次提交的commitHash'
+  */
+
+  /* 
+    打tag
+    git可以给历史中的某一个提交打上标签，以示重要。比较有代表性的是人们会使用这个功能来标记发布结点(例如：v1.0)。
+    
+    ## 列出标签：git tag
+    ## 创建标签：
+      git使用两种主要类型的标签：轻量标签 与 附注标签
+      轻量标签：很像一个不会改变的分支 —— 它只是一个特定提交的引用
+      附注标签：存储在git数据库中的一个完整对象。它们是可以被校验的；其中包含打标签者的名字、电子邮件地址、
+      日期时间；还有一个标签信息。通常建议创建附注标签，这样你可以拥有以上所有信息，但是如果你只是想用一个临时
+      的标签，或者因为某些原因不想要保存那些信息，轻量标签也是可用的。
+    
+      命令：git tag v1.0
+
+    ## 查看特定标签 
+      git show 可以显示任意类型的对象（git对象 树对象 提交对象 tag对象）
+      git show tagname
+    
+    ## 远程标签
+      默认情况下，git push命令并不会传送标签到远程仓库服务器上。在创建完标签后你必须显式地推送到共享服务器上。
+      你可以运行 git push origin [tagname]
+      如果想要一次性推送很多标签，也可以使用带有 --tags选项的git push命令。
+      这将会把所有不在远程仓库服务器上的标签全部传送到那里。git push origin --tags
+
+    ## 删除标签
+      删除标签 要删除掉你本地仓库上的标签，可以使用命令: git tag -d <tagname>
+      应该注意的是上述命令并不会从任何远程仓库中移除这个标签，
+      你必须使用git push <remote> :refs/tags/<tagname>
+      来更新你的远程仓库。
+
+    ## 检出标签 
+        如果你想查看某个标签所指向的文件版本，可以使用 git checkout命令
+        git checkout tagname
+        
+  */
+</script>
+</html>

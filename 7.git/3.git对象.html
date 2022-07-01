@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git对象</title>
+</head>
+<body></body>
+<script>
+  /* 
+    git 对象
+      key:val 组成的键值对（key是val对应的hash）
+      键值对在git内部是一个blob类型
+      git 的核心部分是一个简单的键值对数据库。你可以向该数据库插入任意类型的内容，它会返回一个键值，
+      通过该键值可以在任意时刻再次检索该内容。
+
+    ## 向数据库写入内容 并返回对应键值
+      命令： echo 'test content' | git hash-object -w --stdin
+        -w 选项指示hash-object命令存储数据对象；若不指定此选项，则该命令仅返回对应的键值
+        --stdin (standard input) 选项则指示该命令从标准输入读取内容；若不指定此选项，则须在命令尾部给出待存储文件的路径
+        存文件：git hash-object -w 文件路径
+        返回对应文件的键值：git hash-object 文件路径
+
+      返回：
+        该命令输出一个长度为40个字符的校验和。这是一个SHA-1哈希值
+        d670460b4b4aece5915caf5c68d12f560a9fe3e4
+
+    ## 查看git是如何存储数据的
+    命令：find .git/objects -type f
+    输出： .git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
+        这就是开始时，git存储内容的方式：一个文件对应一条内容。校验和的前两个字符用于命名子目录，
+        余下的38个字符则用作文件名。
+
+    ## 根据键值拉取数据
+    命令：git cat-file -p d670460b4b4aece5915caf5c68d12f560a9fe3e4
+      -p 选项可指示该命令自动判断内容的类型，并为我们显示格式友好的内容
+    返回：对应文件的内容
+
+    命令：git cat-file -t d670460b4b4aece5915caf5c68d12f560a9fe3e4
+      -t 可以查看git存储的键值对的类型 
+    返回：blob
+
+
+    问题：
+      1.记住文件的每一个版本所对应的SHA-1值并不现实
+      2.在git中，文件名并没有被保存，我们仅保存了文件的内容
+    解决方案：树对象
+
+    * 注意：当前的操作都是在对本地数据库进行操作 不涉及暂存区
+  */
+</script>
+</html>
