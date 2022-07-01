@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git复习</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    ### git分支本质
+      分支本质是一个提交对象，分支都会被HEAD所引用（HEAD只会指向一个分支）
+      当我们有新的提交的时候 HEAD会携带当前持有的分支往前移动
+
+    ### git分支命令
+      1.创建分支：git branch branchname
+      2.切换分支：git checkout branchname
+      3.创建&切换分支：git checkout -b branchname
+      4.普通删除分支：git branch -d branchname
+      5.强制删除分支：git branch -D branchname
+      6.合并分支：git merge branchname
+        快进合并 --> 不会产生冲突
+        典型合并 --> 有机会产生冲突
+        解决冲突 --> 打开冲突的文件 进行修改 add commit
+      7.查看分支：git branch
+      8.版本穿梭（时光机）：git branch branchname commitHash
+      9.查看已合并到当前分支的分支：git branch --merged
+        一旦出现在这个列表中就应该删除
+      10.查看没有合并到当前分支的分支列表：git branch --no-merged
+        一旦出现在这个列表中 就应该观察一下是否需要合并
+
+    ### git分支的注意点
+      在切换分支的时候一定要保证当前分支是干净的！！！
+      允许切换分支：
+        分支上所有的内容都处于已提交状态
+        (避免)分支上的内容都是初始化创建 处于未跟踪状态
+        (避免)分支上的内容是初始化创建 第一次处于已暂存状态
+      不允许切换分支：
+        分支上所有的内容处于 已修改状态或第二次以后的已暂存状态
+
+    ### git存储
+      在分支上的工作做到一半时，如果有切换分支的需求，我们应该将现有的工作存储起来
+      git stash: 会将当前分支上的工作推到一个栈中,
+      然后切换分支，进行其他工作，完成其他工作后，切回原分支
+      git stash apply: 将栈顶的工作内容还原 但不让任何内容出栈
+      git stash drop: 去除栈顶的工作内容后 就应该将其删除（出栈）
+      git stash pop: git stash apply + git stash drop
+      git stash list: 查看存储列表
+
+    ### git 后悔药
+      撤销工作目录的修改：git checkout --filename
+      撤销暂存区的修改： git reset HEAD filename
+      撤销提交：git commit --amend
+
+    ### reset三部曲
+      git reset --soft commitHash ---> 用commitHash的内容重置HEAD内容
+      git reset [--mixed] commitHash ---> 用commitHash的内容重置HEAD内容、重置暂存区
+      git reset --hard commitHash ---> 用commitHash的内容重置HEAD内容、重置暂存区、重置工作目录
+
+    ### 路径reset
+      所有的路径reset都要省略第一步！！！
+      第一步是重置HEAD内容 我们知道HEAD本质指向一个分支 分支的本质是一个提交对象
+      提交对象 指向一个树对象 树对象又很有可能指向多个git对象 一个git对象代表一个文件！！！
+      HEAD可以代表一系列文件的状态！！！
+      git reset [--mixed] commitHash filename 
+      用commitHash中filname的内容重置暂存区
+
+    ### git checkout 理解
+      git checkout branchname 跟 git reset --hard commitHash 特别像
+      共同点：都需要重置HEAD、暂存区、工作目录
+      区别：checkout 对工作目录是安全的，reset --hard 是强制覆盖
+           checkout 动HEAD时不会带着分支走而是切换分支，reset --hard 是带着分支走
+
+      checkout + 路径
+      git checkout commitHash filename
+        重置暂存区、重置工作目录
+      git checkout --filename
+        重置工作目录
+
+  */
+</script>
+</html>
