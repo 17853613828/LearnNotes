@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>团队协作</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    什么是远程仓库？
+      为了能在任意git项目上团队协作，你需要知道如何管理自己的远程仓库。远程仓库是指在因特网或其他网络中的你的项目的版本库。
+      你可以有好几个远程仓库，通常有些仓库对你只读，有些则可以读写。与他人协作涉及管理远程仓库以及根据需要推送或拉取数据。
+      管理远程仓库包括了解如何添加远程仓库、移除无效的远程仓库、管理不同的远程分支并定义它们是否被跟踪等等。
+
+    远程协作基本流程：
+      GitHub是最大的Git版本库托管商，是成千上万的开发者和项目能够合作进行的中心。大部分Git版本库都托管在GitHub，
+      很多开源项目使用GitHub实现Git托管、问题追踪、代码审查以及其它事情。所以，尽管这不是Git开源项目的直接部分，
+      但如果想要专业地使用Git，你将不可避免地与GitHub打交道。
+      
+    ## 1.项目经理创建远程仓库：在gitHub上操作
+      GitHub上的项目可通过HTTP和SSH访问，格式是：HTTP：https://github.com/<user>/<project_name>,
+      SSH：git@github.com:<user>/<project_name>。Git可以通过以上两种URL进行抓取和推送，但是用户的访问权限
+      又因为、连接时使用的证书不同而异。
+      通常对于公开项目可以优先分享基于HTTP的URL，因为用户克隆项目不需要有一个GitHub账号。如果你分享SSH URL，用户必须
+      有一个账号并且上传SSH密钥才能访问你的项目。HTTP URL与你贴到浏览器里查看项目用的地址是一样的。
+    
+    ## 2.项目经理创建本地库
+      git init 
+    
+    ## 3.项目经理为远程仓库配置别名&用户信息
+      git remote add <shortname><url>：添加一个新的远程git仓库，同时指定一个你可以轻松引用的简写
+      git remote -v ：显示远程仓库使用的git别名与其对应的URL
+      git remote show [remote-name]：查看某一个远程仓库的更多信息
+      git remote rename pb paul ：重命名
+      git remote rm [remote-name]：移除一个远程仓库
+  
+      git config user.name xxx
+      git config user.email xxx@email.com
+
+    ## 4.项目经理将源码复制进来
+      git add 
+      git commit -m 'init project'
+    
+    ## 5.项目经理推送本地项目到远程仓库
+      git push -u 别名 分支
+    
+    ## 6.项目经理邀请成员&成员接受邀请：在github上操作
+
+    ## 7.成员做出贡献
+      修改源码文件
+      git add 
+      git commit
+      git push 别名 分支
+    
+    ## 8. 项目经理更新修改
+      git fetch 别名 （将修改同步到远程跟踪分支上）
+      git merge 远程跟踪分支
+  */
+
+  /* 
+    一个本地分支怎么去跟踪一个远程跟踪分支？？？
+    1.当克隆的时候 会自动生成一个master本地分支（已经跟踪了对应的远程跟踪分支）
+    2.在新建其它分支时 可以指定想要跟踪的远程跟踪分支
+      git checkout -b 本地分支名 远程跟踪分支名 || git checkout --track 远程跟踪分支名
+    3.将一个已经存在的本地分支 改成一个跟踪分支，先切换到本地分支上，然后
+      git branch -u 远程跟踪分支名  
+  */
+  /* 
+    正常的数据推送和拉取步骤：
+    1. 确保本地分支已经跟踪了远程跟踪分支
+    2. 拉取数据：git pull
+    3. 上传数据：git push
+  */
+
+  /* 
+    删除远程分支：
+    git push origin --delete 分支名   // 删除远程分支
+    git remote prune origin --dry-run   // 列出仍在远程跟踪但是远程已被删除的无用分支
+    git remote prune origin     // 清除上面命令列出来的远程跟踪分支
+  */
+
+  /* 
+    ### 远程协作基本流程
+    1.项目经理创建一个空的远程仓库
+    2.项目经理创建一个本地仓库 git init 
+    3.为远程仓库配置别名 配置用户名、邮箱等
+    4.在本地仓库中初始化代码 提交代码 推送代码
+    5.邀请成员
+    6.成员克隆远程仓库
+    7.成员做出修改
+    8.成员推送自己的修改
+    9.项目经理拉取成员的修改
+  */
+  /* 
+    ### 跟踪：
+    克隆仓库时会自动为master做跟踪
+    本地没有分支：git checkout --track 远程跟踪分支名
+    本地已经创建分支：git branch -u 远程跟踪分支名
+  */
+  /* 
+    ### 推送：git push
+  */
+  /* 
+    ### 拉取：git pull
+  */
+</script>
+</html>
