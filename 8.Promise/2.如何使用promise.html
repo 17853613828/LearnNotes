@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>如何使用Promise?</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /* 
+    1.Promise构造函数：Promise(executor) {}
+    (1) executor函数：执行器(resolve, reject)=>{}
+    (2) resolve函数：内部定义成功时我们调用的函数 value => {}
+    (3) reject函数：内部定义失败时我们调用的函数 reason => {}
+    说明：executor会在promise内部立即同步调用，异步操作在执行器中执行
+  */
+
+  /* 
+    2.Promise.prototype.then方法：(onResolved, onRejected)=>{}
+    (1) onResolved函数：成功的回调函数 (value) => {}
+    (2) onRejected函数：失败的回调函数 (reason) => {}
+    说明：指定用于得到成功value的成功回调和用于得到失败reason的失败回调，返回一个新的promise对象
+  */
+ 
+  /* 
+    3.Promise.prototype.catch方法：(onRejected)=>{}
+    (1) onRejected函数：失败的回调函数(reason)=>{}
+    说明：then()的语法糖，相当于then(undefined, onRejected)
+  */
+
+  /* 
+    4.Promise.resolve方法：(value)=>{}
+    (1) value：成功的数据或promise对象
+    说明：返回一个成功/失败的promise对象，
+    let p = Promise.resolve(100)
+    如果传入的参数为 非Promise类型的对象，则返回的结果为成功Promise对象
+    如果传入的参数为 非Promise对象，则参数的结果决定了resolve的结果
+  */
+  
+  /* 
+    5.Promise.reject方法：(reason)=>{}
+    (1) reason：失败的原因
+    说明：返回一个失败的promise对象
+    let p = Promise.reject(100)
+    无论传入的什么类型的参数，返回的结果都是失败的状态
+  */
+
+  /* 
+    Promise.all方法：(promises)=>{}
+    (1) promises：包含n个promise的数组
+    说明：返回一个新的promise，只有所有的promise都成功才成功，只要有一个失败了就直接失败
+  */
+  let p1 = new Promise((resolve, reject)=>{resolve('ok')})
+  let p2 = Promise.resolve('Success')
+  let p3 = Promise.resolve('Oh Yeah')
+  const result = Promise.all([p1, p2, p3]);
+  console.log(result)
+  /* 
+    Promise.race方法：(promises)=>{}
+    (1)Promises：包含n个promise的数组
+    说明：返回一个新的promise，第一个完成的promise的结果状态就是最终的结果状态
+  */
+</script>
+</html>

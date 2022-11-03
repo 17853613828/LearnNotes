@@ -24,11 +24,14 @@
 
   function f1(){
     var n = 999;
-    function f2(){
-        alert(n); // 999
+    return function f2(){
+        // alert(n); // 999
+        return n
     }
   }
-  f1()
+  // f1()
+  let n2 = f1()()
+  console.log('n2=' +n2)
 
   /*
     在上面的代码中，函数 f2 就被包括在函数 f1 内部，这时 f1 内部的所有局部变量，对 f2 都是可见的。但是反过来就不行，f2 内部的局部变量，对 f1 就是不可见的。

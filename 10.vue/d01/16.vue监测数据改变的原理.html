@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue监测数据变化的原理</title>
+  <style>
+    .box {
+      width: 100%;
+      height: 500px;
+      border: 2px solid red;
+      /* text-align: center; */
+    }
+    .inline-box {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border: 20px solid;
+      border-color: green transparent transparent green;
+      
+    }
+    .block-box::after {
+      /* width: 300px;
+      margin: 20px auto 0;
+      border: 2px solid blue; */
+      position: absolute;
+      width: 0;
+      height: 0;
+      content: "";
+      border: 30px solid;
+      border-color: aqua transparent transparent;
+    }
+  </style>
+</head>
+<script src="../vue.js"></script>
+<body>
+  <div class="box">
+    <span class="inline-box"></span>
+    <div class="block-box">这里是外联元素</div>
+  </div>
+</body>
+<script>
+  /* 
+     
+  */
+  const vm = new Vue({
+    el: '#root',
+    data() {
+      return {
+        arr: ['抽烟','喝酒','烫头']
+      }
+    }
+  })
+
+    /* 
+      数组更新检测
+      vue将被侦听的数组的变更方法进行了包裹，所以它们也将会触发视图更新，这些被包裹的方法包括：
+      push、pop、shift、unshift、splice、sort、reverse
+
+      替换数组
+      变更方法，顾名思义，会变更调用了这些方法的原始数组。相比之下，也有非变更方法，例如filter()、concat()和slice()。
+      它们不会变更原始数组，而总是返回一个新数组。当使用非变更方法时，可以用新数组替换旧数组。
+    */
+</script>
+</html>

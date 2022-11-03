@@ -33,6 +33,8 @@
     // 4.差集  --- 在1里面有的 在2里面没有的
     let diff = [...new Set(arr)].filter(item => !(new Set(arr2).has(item)))
     console.log(diff)   // [1, 2, 3]
+    let diff2 = [...new Set(arr2)].filter(item => !(new Set(arr).has(item)))
+    console.log(diff2)   // [1, 2, 3]
     
 </script>
 </html>

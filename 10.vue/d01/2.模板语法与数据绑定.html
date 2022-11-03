@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模板语法与数据绑定</title>
+  <script src="../vue.js"></script>
+</head>
+<body></body> 
+<div id="root">
+  <h3>姓名：{{name}}</h3>
+  <a :href="url">点击跳转到百度</a>
+  <br>
+  年龄: <input type="text" v-model="age">
+</div>
+<script>
+  new Vue({
+    el: '#root',  //用于指定当前Vue实例为那个容器服务，值通常为css选择器字符串
+    data: {   // data中用于存储数据，数据提供el所指定的容器去使用，值我们暂时先写成一个对象
+      name: '孙悟空',
+      age: 18,
+      url: 'http://www.baidu.com'
+    }
+  })
+
+  /* 
+    Vue模板语法有2大类：
+      1.插值语法：
+        功能：用于解析标签体内容。
+        写法：{{xxx}}, xxx是js表达式，且可以直接读取到data中的所有属性。
+      2.指令语法：
+        功能：用于解析标签（包括：标签属性、标签体内容、绑定事件...）
+        举例：v-bind:href="xxx" 或 简写为 :href="xxx", xxx同样要写js表达式，
+          且可以直接读取到data中的所有属性。
+        备注：Vue中有很多的指令，且形式都是：v-???,此处我们只是拿v-bind举个例子。
+  */
+
+  /* 
+    Vue中有2种数据绑定的方式：
+      1.单向绑定（v-bind）:数据只能从data流向页面
+      2.双向绑定（v-model）:数据不仅能从data流向页面，还可以从页面流向data.
+        备注：
+          1.双向绑定一般都应用在表单类元素上（如：input\select等）
+          2.v-model：value 可以简写成v-model,因为v-model默认收集的就是value值。
+  */
+</script>
+</html>

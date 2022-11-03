@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise自定义封装</title>
+  <script src="./4.promise2.js"></script>
+</head>
+<body>
+  
+</body>
+<script>
+  let p = new Promise((resolve, reject)=>{
+    resolve('Ok')
+    // reject('Error')
+    // throw '我错了～'    
+
+    // setTimeout(()=>{
+    //   // resolve('Ok')
+    //   reject('Error')
+    // }, 1000)
+  })
+  // console.log(p)  
+  let res = p.then(value=>{
+    return 123;
+    console.log(123)
+  })
+  .then(value=>{
+    return 234
+    console.log(234)  
+  })
+  .catch(err=>{
+    console.warn(err)
+  })
+  console.log(res)
+
+  /* 
+    1.初始结构搭建
+    2.resolve和reject结构搭建
+    3.throw抛出异常改变状态
+    4.promise状态只能修改一次
+    5.then方法执行回调
+    6.异步任务回调的执行
+    7.指定多个回调的实现
+    8.同步修改状态then方法结果返回
+    9.异步修改状态then方法结果返回
+    10.then方法完善与优化
+    11.catch方法 异常穿透与值传递
+    12.resolve方法封装
+    13.reject方法封装
+    14.all方法封装
+    15.race方法封装
+    16.then方法回调的异步执行
+  */
+</script>
+</html>
